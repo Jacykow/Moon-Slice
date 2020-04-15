@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Moon Slice</string>
+    <string name="moon_phases">Fazy księżyca</string>
+    <string name="fullmoon">Pełnie w roku</string>
+    <string name="settings">Ustawienia</string>
+    <string name="north">Północna</string>
+    <string name="south">Południowa</string>
+    <string name="hemisphere">Półkula</string>
+    <string name="simple">Prosta</string>
+    <string name="conway">Conwaya</string>
+    <string name="trig1">Trygonometryczna</string>
+    <string name="trig2">Trygonometryczna 2</string>
+    <string name="method">Metoda Obliczeń</string>
 </resources>

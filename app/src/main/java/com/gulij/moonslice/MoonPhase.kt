@@ -1,14 +1,19 @@
 package com.gulij.moonslice
 
 import com.gulij.moonslice.enums.PhaseAlgorithm
+import java.time.LocalDateTime
 import java.util.*
 import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.sin
 
-class MoonPhase {
-    fun algorithmOfChoice(algorithm: PhaseAlgorithm, year: Int, month: Int, day: Int): Double {
-        return when(algorithm){
+object MoonPhase {
+    fun calculate(algorithm: PhaseAlgorithm, date: LocalDateTime): Double {
+        return calculate(algorithm, date.year, date.monthValue, date.dayOfMonth)
+    }
+
+    private fun calculate(algorithm: PhaseAlgorithm, year: Int, month: Int, day: Int): Double {
+        return when (algorithm) {
             PhaseAlgorithm.simple -> simple(year, month, day)
             PhaseAlgorithm.conway -> conway(year, month, day)
             PhaseAlgorithm.trig1 -> trig1(year, month, day)
@@ -49,13 +54,15 @@ class MoonPhase {
         val j0 = 2415020 + 29 * k0
         val f0 =
             0.0001178 * t2 - 0.000000155 * t3 + (0.75933 + 0.53058868 * k0) - (0.000837 * t1 + 0.000335 * t2)
-        val m0 = 360 * (getFraction(k0 * 0.08084821133)) + 359.2242 - 0.0000333 * t2 - 0.00000347 * t3
-        val m1 = 360 * (getFraction(k0 * 0.07171366128)) + 306.0253 + 0.0107306 * t2 + 0.00001236 * t3
+        val m0 =
+            360 * (getFraction(k0 * 0.08084821133)) + 359.2242 - 0.0000333 * t2 - 0.00000347 * t3
+        val m1 =
+            360 * (getFraction(k0 * 0.07171366128)) + 306.0253 + 0.0107306 * t2 + 0.00001236 * t3
         val b1 =
             360 * (getFraction(k0 * 0.08519585128)) + 21.2964 - (0.0016528 * t2) - (0.00000239 * t3)
         var phase = 0
-        var jday: Double = 0.0
-        var oldJ: Double = 0.0
+        var jday = 0.0
+        var oldJ = 0.0
         while (jday < thisJD) {
             var f = f0 + 1.530588 * phase
             val m5 = (m0 + phase * 29.10535608) * degToRad
