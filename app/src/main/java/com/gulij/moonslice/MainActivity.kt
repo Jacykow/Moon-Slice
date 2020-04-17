@@ -35,6 +35,15 @@ class MainActivity : AppCompatActivity() {
                 )
             )
         }
+
+        fullMoonButton.setOnClickListener {
+            startActivity(
+                Intent(
+                    this,
+                    NextFullMoonActivity::class.java
+                )
+            )
+        }
     }
 
     private fun getMoonDrawable(hemisphere: Hemisphere, phase: Int): Drawable {
