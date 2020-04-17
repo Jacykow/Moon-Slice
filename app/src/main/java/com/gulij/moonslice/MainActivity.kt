@@ -19,10 +19,12 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        val phase = MoonPhase.calculate(Configuration.phaseAlgorithm, LocalDateTime.now()).toInt()
+        Configuration.load(this)
+
+        val phase = MoonPhase.calculate(Configuration.instance.phaseAlgorithm, LocalDateTime.now()).toInt()
 
         todayTextView.text = "Dzisiaj: $phase%"
-        moonImageView.setImageDrawable(getMoonDrawable(Configuration.hemisphere, phase))
+        moonImageView.setImageDrawable(getMoonDrawable(Configuration.instance.hemisphere, phase))
 
         settingsButton.setOnClickListener { startActivity(Intent(this, SettingsActivity::class.java)) }
     }

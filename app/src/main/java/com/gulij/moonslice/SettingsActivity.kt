@@ -19,24 +19,23 @@ class SettingsActivity : AppCompatActivity() {
         super.onStart()
 
         hemisphereRadioGroup.check(
-            when (Configuration.hemisphere) {
+            when (Configuration.instance.hemisphere) {
                 Hemisphere.north -> northRadioButton.id
                 Hemisphere.south -> southRadioButton.id
             }
         )
 
         hemisphereRadioGroup.setOnCheckedChangeListener { _, checkedId ->
-            Configuration.hemisphere = when (checkedId) {
+            Configuration.instance.hemisphere = when (checkedId) {
                 northRadioButton.id -> Hemisphere.north
                 southRadioButton.id -> Hemisphere.south
                 else -> Hemisphere.north
             }
-            Toast.makeText(applicationContext," On checked change : "+
-                    Configuration.hemisphere.toString(), Toast.LENGTH_SHORT).show()
+            Configuration.save(this)
         }
 
         methodRadioGroup.check(
-            when (Configuration.phaseAlgorithm) {
+            when (Configuration.instance.phaseAlgorithm) {
                 PhaseAlgorithm.simple -> simpleRadioButton.id
                 PhaseAlgorithm.conway -> conwayRadioButton.id
                 PhaseAlgorithm.trig1 -> trig1RadioButton.id
@@ -45,15 +44,14 @@ class SettingsActivity : AppCompatActivity() {
         )
 
         methodRadioGroup.setOnCheckedChangeListener { _, checkedId ->
-            Configuration.phaseAlgorithm = when (checkedId) {
+            Configuration.instance.phaseAlgorithm = when (checkedId) {
                 simpleRadioButton.id -> PhaseAlgorithm.simple
                 conwayRadioButton.id -> PhaseAlgorithm.conway
                 trig1RadioButton.id -> PhaseAlgorithm.trig1
                 trig2RadioButton.id -> PhaseAlgorithm.trig2
                 else -> PhaseAlgorithm.simple
             }
-            Toast.makeText(applicationContext," On checked change : "+
-                    Configuration.phaseAlgorithm.toString(), Toast.LENGTH_SHORT).show()
+            Configuration.save(this)
         }
     }
 }
