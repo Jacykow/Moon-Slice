@@ -21,7 +21,7 @@ class NextFullMoonActivity : AppCompatActivity() {
         updateDates(LocalDateTime.now().year)
 
         checkFullMoonsButton.setOnClickListener {
-            val year = yearEditText.text.toString().toIntOrNull()?.coerceIn(1950, 2100)
+            val year = yearEditText.text.toString().toIntOrNull()?.coerceIn(1900, 2200)
             if (year == null) {
                 Toast.makeText(this, "Wprowadź rok!", Toast.LENGTH_SHORT).show()
             } else {
@@ -51,6 +51,6 @@ class NextFullMoonActivity : AppCompatActivity() {
             date = date.plusDays(1)
         }
 
-        next_full_moons_list.adapter!!.notifyDataSetChanged()
+        next_full_moons_list.adapter?.notifyDataSetChanged()
     }
 }
