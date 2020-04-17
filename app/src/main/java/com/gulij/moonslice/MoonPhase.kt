@@ -8,17 +8,17 @@ import kotlin.math.floor
 import kotlin.math.sin
 
 object MoonPhase {
-    fun calculate(algorithm: PhaseAlgorithm, date: LocalDateTime): Double {
+    fun calculate(algorithm: PhaseAlgorithm, date: LocalDateTime): Int {
         return calculate(algorithm, date.year, date.monthValue, date.dayOfMonth)
     }
 
-    private fun calculate(algorithm: PhaseAlgorithm, year: Int, month: Int, day: Int): Double {
+    private fun calculate(algorithm: PhaseAlgorithm, year: Int, month: Int, day: Int): Int {
         return when (algorithm) {
             PhaseAlgorithm.simple -> simple(year, month, day)
             PhaseAlgorithm.conway -> conway(year, month, day)
             PhaseAlgorithm.trig1 -> trig1(year, month, day)
             PhaseAlgorithm.trig2 -> trig2(year, month, day)
-        }
+        }.toInt().coerceIn(1, 30) - 1
     }
 
     private fun simple(year: Int, month: Int, day: Int): Double {

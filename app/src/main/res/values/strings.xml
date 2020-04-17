@@ -11,4 +11,6 @@
     <string name="trig1">Trygonometryczna</string>
     <string name="trig2">Trygonometryczna 2</string>
     <string name="method">Metoda Obliczeń</string>
+    <string name="input_year">Wprowadź rok</string>
+    <string name="check_full_moons">Sprawdź pełnie</string>
 </resources>
