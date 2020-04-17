@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.gulij.moonslice.enums.Hemisphere
 import kotlinx.android.synthetic.main.activity_main.*
@@ -17,6 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onStart() {
         super.onStart()
 
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         val phase = MoonPhase.calculate(Configuration.instance.phaseAlgorithm, LocalDateTime.now())
 
-        todayTextView.text = "Dzisiaj: $phase%"
+        todayTextView.text = "Dzisiaj: ${(phase * 100.0 / 29.0).toInt()}%"
         moonImageView.setImageDrawable(getMoonDrawable(Configuration.instance.hemisphere, phase))
 
         settingsButton.setOnClickListener {
